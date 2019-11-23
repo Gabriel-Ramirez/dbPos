@@ -299,12 +299,12 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Observacion</span>
-                                        </div>
-                                        <textarea class="form-control" v-model="nuevaOrden.observacion" aria-label="With textarea"></textarea>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Observacion</span>
                                     </div>
+                                    <textarea class="form-control" v-model="nuevaOrden.observacion" aria-label="With textarea"></textarea>
                                 </div>
                             </div>
                             <!-------------------------- Resumen paso 3  --------------------------->
@@ -318,16 +318,16 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td style="font-weight: bold;">MESERO:</td>
-                                                    <td><input disabled="disabled" type="text" id="mesero" class="ml-2 form-control-sm" v-model="nuevaOrden.mesero"></td>
+                                                    <td style="font-weight: bold;min-width: 100px;">MESERO:</td>
+                                                    <td>{{nuevaOrden.mesero}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td style="font-weight: bold;">MESA:</td>
-                                                    <td><input disabled="disabled" id="mesa" type="text" class="ml-2 form-control-sm" v-model="nuevaOrden.mesa"></td>
+                                                    <td>{{nuevaOrden.mesa}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td style="font-weight: bold;">CLIENTE:</td>
-                                                    <td><input disabled="disabled" id="cliente" type="text" class="ml-2 form-control-sm" v-model="nuevaOrden.cliente"></td>
+                                                    <td>{{nuevaOrden.cliente}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -353,8 +353,8 @@
                                         </table>
                                     </div>
                                 </form>
-                                <div style="text-align: end;"><label for="total" style="padding-right: 20px;">Total:</label><input id="total" type="text" disabled class="form-control" style="max-width: 20%;display: inline;" v-model="totalNuevaOrden"></div>
-                                <div class="modal-footer"><button class="btn btn-success bg-primary border-primary" data-dismiss="modal" type="button" @click="nuevaOrdenDB();">Crear Orden</button><button class="btn btn-danger" data-dismiss="modal" type="button" @click="cobrarDesdeModal();">Cobrar</button></div>
+                                <div style="text-align: end;"><label for="total" style="padding-right: 20px;">Total:</label><input id="total" type="text" disabled class="form-control" style="max-width: 30%;display: inline;text-align: center;" v-model="totalNuevaOrden"></div>
+                                <div class="modal-footer"><button class="btn btn-success bg-primary border-primary" data-dismiss="modal" type="button" @click="nuevaOrdenDB();" style="white-space: nowrap;">Crear Orden</button><button class="btn btn-danger" data-dismiss="modal" type="button" @click="cobrarDesdeModal();" style="white-space: nowrap;">Cobrar</button></div>
                             </div>
                         </div>
                     </div>
@@ -501,7 +501,7 @@
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="assets/js/ordenVue.js"></script>
     <script src="assets/js/script.js"></script>

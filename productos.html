@@ -150,9 +150,9 @@
             }}.</span
           ><i class="fa fa-close close" v-on:click="cerrarAlerta();"></i
         ></i>
-
-        <div>
-          <div>
+<!--este es el nav de categoria-->
+        <div id="navBarResize">
+          <div >
             <ul class="nav nav-tabs nav-fill shadow">
               <li
                 class="nav-item"
@@ -165,7 +165,7 @@
                   role="tab"
                   data-toggle="tab"
                   href="#tab-1"
-                  v-on:click.prevent="categoriaSelected=Cate.idCategoria;"
+                  v-on:click.prevent="categoriaSelected=Cate.idCategoria;resizeBody()"
                   style="color: #18bc9c;background-color: #fff;"
                   v-bind:class="{ 'navActivado': categoriaSelected==Cate.idCategoria }"
                   >{{ Cate.nombreCategoria }}<br
@@ -467,7 +467,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="assets/js/footer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/productosVue.js"></script>
