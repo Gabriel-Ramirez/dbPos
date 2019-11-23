@@ -97,7 +97,7 @@ var vueProduct = new Vue({
         },
         cargarDatos: function() {
             //cargando las categorias
-            axios.get('http://localhost:3000/api/Categoria')
+            axios.get('https://db-pos.herokuapp.com/api/Categoria')
                 .then(function(res) {
                     vueProduct.categorias = res.data;
                 })
@@ -106,7 +106,7 @@ var vueProduct = new Vue({
                     console.log(error);
                 });
             //PRODUCTOS
-            axios.get('http://localhost:3000/api/Productos')
+            axios.get('https://db-pos.herokuapp.com/api/Productos')
                 .then(function(res) {
                     vueProduct.productos = res.data;
                 })
@@ -117,7 +117,7 @@ var vueProduct = new Vue({
 
         },
         agregarProducto: function() {
-            axios.post('http://localhost:3000/api/Productos', this.nuevoProducto)
+            axios.post('https://db-pos.herokuapp.com/api/Productos', this.nuevoProducto)
                 .then(function(res) {
                     vueProduct.nuevoProducto.nombreProducto = "";
                     vueProduct.nuevoProducto.precio = 0;
@@ -132,7 +132,7 @@ var vueProduct = new Vue({
                 });
         },
         modificarProducto: function() {
-            axios.put('http://localhost:3000/api/Productos', this.productos[this.productoSelected])
+            axios.put('https://db-pos.herokuapp.com/api/Productos', this.productos[this.productoSelected])
                 .then(function(res) {
                     console.log("UPDATED PRODUCTO");
                     vueProduct.mostrarAlerta("Producto Modificado", "Se modifico el producto satisfactoriamente");
@@ -147,7 +147,7 @@ var vueProduct = new Vue({
         },
         eliminarProducto: function() {
             console.log();
-            axios.delete('http://localhost:3000/api/Productos/' + this.productos[this.productoSelected].idProducto)
+            axios.delete('https://db-pos.herokuapp.com/api/Productos/' + this.productos[this.productoSelected].idProducto)
                 .then(function(res) {
                     console.log("DELETE PRODUCTO");
                     vueProduct.cargarDatos();
