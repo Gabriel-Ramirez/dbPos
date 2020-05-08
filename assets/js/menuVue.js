@@ -1,5 +1,5 @@
 var vueProduct = new Vue({
-    el: "#top",
+    el: "#menu",
     data: {
         seleccionado: {
             color: 'white',

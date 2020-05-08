@@ -25,7 +25,7 @@ const vueApp = new Vue({
 
     methods: {
         agregarCategoria() {
-            axios.post('https://db-pos.herokuapp.com/api/Categoria', this.nuevaCategoria)
+            axios.post(baseUri+'/Categoria', this.nuevaCategoria)
                 .then(function(response) {
                     vueApp.cargarDatos();
                     vueApp.nuevaCategoria = {
@@ -47,7 +47,7 @@ const vueApp = new Vue({
 
 
         editarCategoria() {
-            axios.put('https://db-pos.herokuapp.com/api/Categoria', {
+            axios.put(baseUri+'/Categoria', {
                     idCategoria: this.categoriaSeleccionada.idCategoria,
                     nombreCategoria: this.categoriaSeleccionada.nombreCategoria
                 })
@@ -65,7 +65,7 @@ const vueApp = new Vue({
 
         eliminarCategoria: function() {
 
-            axios.delete('https://db-pos.herokuapp.com/api/Categoria/' + this.categoriaSeleccionada.idCategoria)
+            axios.delete(baseUri+'/Categoria/' + this.categoriaSeleccionada.idCategoria)
                 .then(function(res) {
                     console.log("DELETE PRODUCTO");
                     vueApp.cargarDatos();
@@ -93,7 +93,7 @@ const vueApp = new Vue({
         //consume la API con axios
         cargarDatos: function() {
             //Carga categorias
-            axios.get('https://db-pos.herokuapp.com/api/Categoria')
+            axios.get(baseUri+'/Categoria')
                 .then(function(response) {
                     vueApp.categorias = response.data;
                     console.log("se cargaron los datos");
@@ -104,7 +104,7 @@ const vueApp = new Vue({
                 });
 
             //Carga productos
-            axios.get('https://db-pos.herokuapp.com/api/Productos')
+            axios.get(baseUri+'/Productos')
                 .then(function(response) {
                     vueApp.productos = response.data;
                 })

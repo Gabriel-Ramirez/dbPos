@@ -145,7 +145,7 @@ const vordenes = new Vue({
             var totalAnterior = this.ordenSelected.total;
             this.ordenSelected.total = (this.precioTotal + totalAnterior).toFixed(2);
             console.log(this.ordenSelected.total);
-            axios.put('https://db-pos.herokuapp.com/api/Ordens', this.ordenSelected)
+            axios.put(baseUri+'/Ordens', this.ordenSelected)
                 .then(function(response) {
                     console.log("Se actualizo el total");
                     vordenes.cargarDatos();
@@ -167,7 +167,7 @@ const vordenes = new Vue({
                         var NuevaCantidad = yaEnorden.cantidad + porAgregar.cantidad;
                         porAgregar.cantidad = NuevaCantidad;
                         console.log("ya hay un producto igual en la orden")
-                        axios.put('https://db-pos.herokuapp.com/api/DetalleOrdens', porAgregar)
+                        axios.put(baseUri+'/DetalleOrdens', porAgregar)
                             .then(function(response) {
                                 vordenes.cargarDatos();
                                 vordenes.actualizarTotalOrden();
@@ -181,7 +181,7 @@ const vordenes = new Vue({
                     } else {
                         if (yaEnorden.idOrden === porAgregar.idOrden) {
                             console.log("no hay productos iguales en la orden")
-                            axios.post('https://db-pos.herokuapp.com/api/DetalleOrdens', porAgregar)
+                            axios.post(baseUri+'/DetalleOrdens', porAgregar)
                                 .then(function(response) {
                                     vordenes.cargarDatos();
                                     vordenes.actualizarTotalOrden();
@@ -262,7 +262,7 @@ const vordenes = new Vue({
             this.obtenerElTotalNuevaOrden();
             this.nuevaOrden.total = this.totalNuevaOrden;
 
-            axios.post('https://db-pos.herokuapp.com/api/Ordens', this.nuevaOrden)
+            axios.post(baseUri+'/Ordens', this.nuevaOrden)
                 .then(function(response) {
                     console.log(response)
                     vordenes.ordenSelected = response.data;
@@ -272,7 +272,7 @@ const vordenes = new Vue({
                     })
                     console.log(vordenes.detallesDeNuevaOrden)
                     for (var iterator of vordenes.detallesDeNuevaOrden) {
-                        axios.post('https://db-pos.herokuapp.com/api/DetalleOrdens', iterator)
+                        axios.post(baseUri+'/DetalleOrdens', iterator)
                             .then(function(res) {
                                 vordenes.cargarDatos();
                                 vordenes.mostrarAlertaCambio('Exito', 'Se agrego la orden');
@@ -363,7 +363,7 @@ const vordenes = new Vue({
 
         cargarDatos: function() {
             //cargando las ordenes
-            axios.get('https://db-pos.herokuapp.com/api/Ordens')
+            axios.get(baseUri+'/Ordens')
                 .then(function(res) {
                     vordenes.ordenes = res.data;
                 })
@@ -373,7 +373,7 @@ const vordenes = new Vue({
                 });
 
             //PRODUCTOS
-            axios.get('https://db-pos.herokuapp.com/api/Productos')
+            axios.get(baseUri+'/Productos')
                 .then(function(res) {
                     vordenes.productos = res.data;
                 })
@@ -383,7 +383,7 @@ const vordenes = new Vue({
                 });
 
             //Cargar Categorias
-            axios.get('https://db-pos.herokuapp.com/api/Categoria')
+            axios.get(baseUri+'/Categoria')
                 .then(function(res) {
                     vordenes.categorias = res.data;
                 })
@@ -393,7 +393,7 @@ const vordenes = new Vue({
 
 
             //Cargar detalle de orden
-            axios.get('https://db-pos.herokuapp.com/api/DetalleOrdens')
+            axios.get(baseUri+'/DetalleOrdens')
                 .then(function(res) {
                     vordenes.detalleOrdenes = res.data;
                 })
@@ -402,7 +402,7 @@ const vordenes = new Vue({
                 });
 
             //Detalle Orden
-            axios.get('https://db-pos.herokuapp.com/api/DetalleOrdens')
+            axios.get(baseUri+'/DetalleOrdens')
                 .then(function(res) {
                     vordenes.detalleOrden = res.data;
                 })
@@ -422,9 +422,9 @@ const vordenes = new Vue({
         eliminarOrden: function() {
             if (this.ordenSelected.estado != ("C" || "c")) {
                 console.log("Eliminar orden")
-                axios.delete('https://db-pos.herokuapp.com/api/DetalleOrdens/' + this.ordenSelected.idOrden)
+                axios.delete(baseUri+'DetalleOrdens/' + this.ordenSelected.idOrden)
                     .then(function(res) {
-                        axios.delete('https://db-pos.herokuapp.com/api/Ordens/' + vordenes.ordenSelected.idOrden)
+                        axios.delete(baseUri+'/Ordens/' + vordenes.ordenSelected.idOrden)
                             .then(function(res) {
                                 console.log("DELETE Orden");
                                 vordenes.mostrarAlertaCambio("Exito:", "La orden se eliminó de la base de datos");
@@ -490,7 +490,7 @@ const vordenes = new Vue({
                 console.log("verificacion de efectivo");
                 if (this.efectivo > this.ordenSelected.total) {
                     this.cambio = this.efectivo - this.ordenSelected.total;
-                    axios.put('https://db-pos.herokuapp.com/api/Ordens/' + this.ordenSelected.idOrden, {
+                    axios.put(baseUri+'/Ordens/' + this.ordenSelected.idOrden, {
                             "fecha": this.ordenSelected.fecha,
                             "mesero": this.ordenSelected.mesero,
                             "mesa": this.ordenSelected.mesa,
